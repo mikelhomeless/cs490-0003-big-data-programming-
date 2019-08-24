@@ -1,4 +1,4 @@
-ICP 1 - Installation and intro to hadoop
+# ICP 1 - Installation and intro to hadoop
 
 ## Task 1 - Load first dataset into hadoop
 ![Image of task 1](assets/task1.png)
