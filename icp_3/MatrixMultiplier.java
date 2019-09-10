@@ -17,28 +17,28 @@ public class MatrixMultiplier {
 
     public static class Map
             extends org.apache.hadoop.mapreduce.Mapper<LongWritable, Text, Text, Text> {
-        @Override
+        
         public void map(LongWritable key, Text value, Context context)
                 throws IOException, InterruptedException {
             Configuration conf = context.getConfiguration();
             int m = Integer.parseInt(conf.get("m"));
             int p = Integer.parseInt(conf.get("p"));
             String line = value.toString();
-            // (M, i, j, Mij);
+            
             String[] tokens = line.split(",");
             Text outputKey = new Text();
             Text outputValue = new Text();
             if (tokens[0].equals("M")) {
                 for (int k = 0; k < p; k++) {
                     outputKey.set(tokens[1] + "," + k);
-                    // outputKey.set(i,k);
+                    
                     outputValue.set(tokens[0] + "," + tokens[2]
                             + "," + tokens[3]);
-                    // outputValue.set(M,j,Mij);
+                  
                     context.write(outputKey, outputValue);
                 }
             } else {
-                // (N, j, k, Njk);
+                
                 for (int i = 0; i < m; i++) {
                     outputKey.set(i + "," + tokens[2]);
                     outputValue.set("N," + tokens[1] + ","
@@ -55,8 +55,7 @@ public class MatrixMultiplier {
         public void reduce(Text key, Iterable<Text> values, Context context)
                 throws IOException, InterruptedException {
             String[] value;
-            //key=(i,k),
-            //Values = [(M/N,j,V/W),..]
+          
             HashMap<Integer, Float> hashA = new HashMap<Integer, Float>();
             HashMap<Integer, Float> hashB = new HashMap<Integer, Float>();
             for (Text val : values) {
