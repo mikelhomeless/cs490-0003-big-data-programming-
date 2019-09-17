@@ -16,7 +16,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 public class MatrixMultiplier {
 
     public static class Map
-            extends Mapper<LongWritable, Text, Text, Text> {
+            extends org.apache.hadoop.mapreduce.Mapper<LongWritable, Text, Text, Text> {
 
         public void map(LongWritable key, Text value, Context context)
                 throws IOException, InterruptedException {
@@ -30,12 +30,12 @@ public class MatrixMultiplier {
             Text outValue = new Text();
             if (tokens[0].equals("M")) {
                 for (int k = 0; k < p; k++) {
-                    outKey.set(tokens[1] + "," + k);
+                    outputKey.set(tokens[1] + "," + k);
 
-                    outValue.set(tokens[0] + "," + tokens[2]
+                    outputValue.set(tokens[0] + "," + tokens[2]
                             + "," + tokens[3]);
 
-                    context.write(outKey, outValue);
+                    context.write(outputKey, outputValue);
                 }
             } else {
 
@@ -56,9 +56,8 @@ public class MatrixMultiplier {
                 throws IOException, InterruptedException {
             String[] value;
 
-            // using a hashmap here because it's easier than sorting on a secondary key within a java vector
-            HashMap<Integer, Float> matrixM = new HashMap<Integer, Float>();
-            HashMap<Integer, Float> matrixN = new HashMap<Integer, Float>();
+            HashMap<Integer, Float> hashA = new HashMap<Integer, Float>();
+            HashMap<Integer, Float> hashB = new HashMap<Integer, Float>();
             for (Text val : values) {
                 value = val.toString().split(",");
                 if (value[0] == "M") {
