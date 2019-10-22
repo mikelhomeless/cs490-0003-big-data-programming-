@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="195436b5-bc6a-4137-8573-8247f0910381" name="Default Changelist" comment="" />
+    <list default="true" id="195436b5-bc6a-4137-8573-8247f0910381" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/scala/icp2.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/scala/BiGramCount.scala" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/scala/BiGramCount.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.12/classes/BiGramCount$.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/scala-2.12/classes/BiGramCount$.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/scala-2.12/classes/META-INF/WordCount.kotlin_module" beforeDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,11 +23,17 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />
   </component>
   <component name="ProjectId" id="1SDQAYjuTPSvW9xdZIvIHhiKYSg" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -38,7 +51,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.AddedFilter">
+  <component name="RunManager" selected="Application.Icp2">
     <configuration name="AddedFilter" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="AddedFilter" />
       <module name="WordCount" />
@@ -49,6 +62,13 @@
     <configuration name="BasicMap" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="BasicMap" />
       <module name="wordcount_5297" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Icp2" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="Icp2" />
+      <module name="WordCount" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -69,6 +89,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Icp2" />
         <item itemvalue="Application.AddedFilter" />
         <item itemvalue="Application.WordCount" />
         <item itemvalue="Application.SecondarySort$" />
@@ -103,6 +124,7 @@
     </option>
     <option name="modificationStamps">
       <map>
+        <entry key="$PROJECT_DIR$" value="3110675717071" />
         <entry key="$PROJECT_DIR$/build.sbt" value="2843344200" />
         <entry key="$PROJECT_DIR$/project/build.properties" value="1518598428" />
       </map>
@@ -120,5 +142,16 @@
       <updated>1571095543107</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

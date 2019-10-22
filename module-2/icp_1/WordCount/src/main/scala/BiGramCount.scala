@@ -1,4 +1,5 @@
 import org.apache.spark._
+
 object BiGramCount {
   def main(args: Array[String]) {
     //val inputFile = args(0)
