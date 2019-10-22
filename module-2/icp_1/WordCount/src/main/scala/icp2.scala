@@ -35,9 +35,9 @@ object Icp2 {
     val listToSort = sc.parallelize(List[Int](2,4,9,5,26,2,0,8))
     val resultList = listToSort.map(sub_l => List[Int](sub_l))
     val merged = resultList.reduce((l1, l2) => merge(l1, l2))
-    val file = "output.txt"
+    val file = "icp1_output.txt"
     val writter = new BufferedWriter(new FileWriter(file))
-    writter.write(merged.toString())
+    writter.write(merged.toString() + "\n")
 
     val dfsResult = dfs(1, g)
     writter.write("dfsresult: " + dfsResult.toString())
