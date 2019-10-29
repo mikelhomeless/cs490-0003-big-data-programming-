@@ -33,14 +33,14 @@ object icp_3 {
     // Question 1.5
     df.groupBy("treatment").count().show()
 
-
-    // Question 2.1
+//
+//    // Question 2.1
     new_df1.createOrReplaceTempView("dataFrame_1")
     new_df2.createOrReplaceTempView("dataFrame_2")
-    new_df1.sqlContext.sql("SELECT Timestamp, COUNT(*) FROM dataFrame_1 GROUP BY Timestamp HAVING ( COUNT(*) > 1)")
     new_df1.sqlContext.sql("SELECT A.Country, count(A.Country) from dataFrame_1 as A inner join dataFrame_2 as B on A.Country=B.Country group by A.Country").show()
-
-    // Question 2.2
-    print(df.collect()(13).toString())
+    new_df1.sqlContext.sql("SELECT A.state, avg(A.Age) from dataFrame_1 as A inner join dataFrame_2 as B on A.Country=B.Country group by A.state").show()
+//
+//    // Question 2.2
+    print(df.collect()(12).toString())
   }
 }
