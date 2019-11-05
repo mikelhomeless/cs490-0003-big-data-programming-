@@ -1,0 +1,4 @@
+[debug] "not up to date. inChanged = true, force = false
+[debug] Updating ProjectRef(uri("file:/Users/pepperjacked/Desktop/cs490-0003-big-data-programming-/module-2/icp_3/"), "icp_3")...
+[debug] Done updating ProjectRef(uri("file:/Users/pepperjacked/Desktop/cs490-0003-big-data-programming-/module-2/icp_3/"), "icp_3")
+[warn] There may be incompatibilities among your library dependencies; run 'evicted' to see detailed eviction warnings.
