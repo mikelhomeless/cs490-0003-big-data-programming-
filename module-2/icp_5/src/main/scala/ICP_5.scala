@@ -14,9 +14,6 @@ object ICP_5 {
 
     spark.sparkContext.setLogLevel("OFF")
 
-
-
-
     // Question 1 thru 4
     val input = spark.sqlContext.read.option("header", "true").csv("station_data.csv")
       .withColumnRenamed("station_id", "id")
