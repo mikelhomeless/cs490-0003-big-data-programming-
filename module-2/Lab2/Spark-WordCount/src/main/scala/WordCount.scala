@@ -15,10 +15,13 @@ object WordCount {
     // Create the context with a 1 second batch size
 
 
-    val tweets: DStream[Status] = TwitterUtils.createStream(ssc, None)
+    val tweetStream: DStream[Status] = TwitterUtils.createStream(ssc, None)
 
-    val wc = tweets.map( _.getText()).flatMap(_.split(" ")).map(x => (x, 1)).reduceByKey(_ + _)
-    wc.print()
+    val tweets = tweetStream.map(_.getText)
+    val counts = tweets.flatMap(_.split(" ")).map(word => (word, 1)).reduceByKey({case (x, y) => x + y})
+
+    counts.print()
+    counts.saveAsTextFiles("Outputs/run")
     ssc.start()
     ssc.awaitTermination()
   }
