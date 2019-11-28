@@ -8,7 +8,7 @@ import org.apache.spark.streaming.twitter._
 object WordCount {
   def main(args: Array[String]) {
     Logger.getLogger("org.apache.spark").setLevel(Level.WARN)
-    val conf = new SparkConf().setMaster("local").setAppName("NetworkWordCount")
+    val conf = new SparkConf().setMaster("local[2]").setAppName("Hadoop Sqoop Poop")
     val ssc = new StreamingContext(conf, Seconds(5))
 
 //    System.setProperty("hadoop.home.dir","C:\\winutils" )
@@ -21,7 +21,5 @@ object WordCount {
     wc.print()
     ssc.start()
     ssc.awaitTermination()
-
-    //counts.saveAsTextFile("output")
   }
 }
