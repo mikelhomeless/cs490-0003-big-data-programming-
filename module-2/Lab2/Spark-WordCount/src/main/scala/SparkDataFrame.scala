@@ -41,67 +41,79 @@ object SparkDataFrame {
     winnersDF.createOrReplaceTempView("worldcupwinners")
 
 
+    // 1
     //Shows games where there was a specific Observation
     matchesDF.filter("WinConditions != ' '").orderBy("DateTime").show()
 
+    // 2
     //Shows final matches where the home team wins by only one goal
     matchesDF.filter("Stage == 'Final'").filter("HomeTeamGoals == (AwayTeamGoals + 1)").show()
 
+    // 3
     //Shows high-scoring matches by year
     val high1 = matchesDF.filter("HomeTeamGoals > 3").orderBy("DateTime")
     val high2 = matchesDF.filter("AwayTeamGoals > 3").orderBy("DateTime")
     val highscores = high1.union(high2)
     high2.show()
+
+    // 4
     //Shows Average Home and Away team scores
     spark.sqlContext.sql("SELECT avg(HomeTeamGoals), avg(AwayTeamGoals) FROM worldcupmatches").show()
+
+    // 5
     //Shows games that went into extra time
     spark.sqlContext.sql("SELECT * FROM worldcupmatches WHERE WinConditions LIKE '%extra time%'").show()
 
-      val homeUpset = matchesDF
-        .filter("HalftimeHomeGoals < HalftimeAwayGoals AND HomeTeamGoals > AwayTeamGoals")
-        .withColumnRenamed("HomeTeam", "Winner")
-        .withColumnRenamed("AwayTeam", "Loser")
+    // 6
+    val homeUpset = matchesDF
+      .filter("HalftimeHomeGoals < HalftimeAwayGoals AND HomeTeamGoals > AwayTeamGoals")
+      .withColumnRenamed("HomeTeam", "Winner")
+      .withColumnRenamed("AwayTeam", "Loser")
 
-      val awayUpset = matchesDF
-        .filter("HalftimeHomeGoals > HalftimeAwayGoals AND HomeTeamGoals < AwayTeamGoals")
-        .withColumnRenamed("AwayTeam", "Winner")
-        .withColumnRenamed("HomeTeam", "Loser")
-//
-//      // Print all of the games that were upsets
-      val upsetDF = homeUpset.union(awayUpset)
-      upsetDF.show()
-//
-//      // Of all the World cup winners, what games they won were upsets?
-      winnersDF
-        .join(
-          upsetDF,
-          upsetDF("Winner") <=> winnersDF("SeasonWinner") && upsetDF("Year") <=> winnersDF("Year"))
-        .select("DateTime", "Stadium", "City", "Winner", "Loser", "HomeTeamGoals", "AwayTeamGoals", "HalftimeHomeGoals", "HalftimeAwayGoals")
-        .show()
+    val awayUpset = matchesDF
+      .filter("HalftimeHomeGoals > HalftimeAwayGoals AND HomeTeamGoals < AwayTeamGoals")
+      .withColumnRenamed("AwayTeam", "Winner")
+      .withColumnRenamed("HomeTeam", "Loser")
 
-      // Grab the maximum attendance for each year
-      matchesDF
-        .groupBy("Year")
-        .agg(max("Attendance") as "Attendance")
-        .select("Year", "Attendance")
-        .show()
+    // Print all of the games that were upsets
+    val upsetDF = homeUpset.union(awayUpset)
+    upsetDF.show()
 
-      // Get counts of the number of games a referee has been a part of
-      matchesDF
-        .groupBy("Referee")
-        .agg(count("Referee") as "Count")
-        .orderBy(desc("Count"))
-        .show()
+    // 7
+    // Of all the World cup winners, what games they won were upsets?
+    winnersDF
+      .join(
+        upsetDF,
+        upsetDF("Winner") <=> winnersDF("SeasonWinner") && upsetDF("Year") <=> winnersDF("Year"))
+      .select("DateTime", "Stadium", "City", "Winner", "Loser", "HomeTeamGoals", "AwayTeamGoals", "HalftimeHomeGoals", "HalftimeAwayGoals")
+      .show()
 
-      // Get all players that played in a final game
-      matchesDF
-        .filter("Stage = 'Final'")
-        .join(
-            playersDF,
-            playersDF("MatchID") <=> matchesDF("MatchID")
-        )
-        .select("PlayerName", "TeamInitials", "Year", "DateTime")
-        .orderBy("Year", "TeamInitials", "PlayerName")
-        .show()
+    // 8
+    // Grab the maximum attendance for each year
+    matchesDF
+      .groupBy("Year")
+      .agg(max("Attendance") as "Attendance")
+      .select("Year", "Attendance")
+      .show()
+
+    // 9
+    // Get counts of the number of games a referee has been a part of
+    matchesDF
+      .groupBy("Referee")
+      .agg(count("Referee") as "Count")
+      .orderBy(desc("Count"))
+      .show()
+
+    // 10
+    // Get all players that played in a final game
+    matchesDF
+      .filter("Stage = 'Final'")
+      .join(
+          playersDF,
+          playersDF("MatchID") <=> matchesDF("MatchID")
+      )
+      .select("PlayerName", "TeamInitials", "Year", "DateTime")
+      .orderBy("Year", "TeamInitials", "PlayerName")
+      .show()
   }
 }
