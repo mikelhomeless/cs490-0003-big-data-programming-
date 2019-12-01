@@ -7,13 +7,11 @@ import org.apache.spark.streaming.twitter._
 
 object WordCount {
   def main(args: Array[String]) {
-    Logger.getLogger("org.apache.spark").setLevel(Level.WARN)
+    Logger.getLogger("org.apache.spark").setLevel(Level.OFF)
     val conf = new SparkConf().setMaster("local[2]").setAppName("Hadoop Sqoop Poop")
     val ssc = new StreamingContext(conf, Seconds(5))
 
 //    System.setProperty("hadoop.home.dir","C:\\winutils" )
-    // Create the context with a 1 second batch size
-
 
     val tweetStream: DStream[Status] = TwitterUtils.createStream(ssc, None)
 
